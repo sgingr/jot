@@ -20,5 +20,21 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  app.import('node_modules/popper.js/dist/umd/popper.min.js');
+  app.import('node_modules/bootstrap/dist/js/bootstrap.min.js');
+  app.import('node_modules/bootstrap/dist/css/bootstrap.min.css');
+  app.import('node_modules/selectize/dist/js/standalone/selectize.min.js');
+  app.import('node_modules/selectize/dist/css/selectize.bootstrap3.css');
+  app.import('node_modules/animate.css/animate.min.css');
+  app.import('node_modules/feather-icons/dist/feather.min.js');
+  app.import("vendor/foundation-icons/foundation-icons.css");
+  app.import("vendor/foundation-icons/foundation-icons.woff", {
+      destDir: 'assets'
+  });
+  app.import("vendor/foundation-icons/foundation-icons.ttf", {
+      destDir: 'assets'
+  });
+  app.import('vendor/ionicons-2.0.1/css/ionicons.min.css');
+
   return app.toTree();
 };
