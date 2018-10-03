@@ -3,6 +3,11 @@ import { computed } from '@ember/object';
 import $ from 'jquery';
 
 export default Component.extend({
+  /*
+  |----------------------------------------------------------
+  | Properties
+  |----------------------------------------------------------
+  */
   displayNotes: computed('notes.[]', function() {
     return this.notes.sortBy('id').reverseObjects();
   }),
@@ -17,6 +22,11 @@ export default Component.extend({
   modalTitle: null,
   activeNote: null,
 
+  /*
+  |----------------------------------------------------------
+  | Properties
+  |----------------------------------------------------------
+  */
   init() {
     this._super(...arguments);
     let obj = this;
@@ -73,6 +83,11 @@ export default Component.extend({
     }];
   },
 
+  /*
+  |----------------------------------------------------------
+  | didInsertElement
+  |----------------------------------------------------------
+  */
   didInsertElement() {
     //Category select
     $('#notesCategorySelect').selectize({
@@ -92,6 +107,11 @@ export default Component.extend({
     })
   },
 
+  /*
+  |----------------------------------------------------------
+  | actions
+  |----------------------------------------------------------
+  */
   actions: {
     addNote() {
       let obj = this;
