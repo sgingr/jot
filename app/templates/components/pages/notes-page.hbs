@@ -13,33 +13,87 @@
 </div>
 
 <!-- List -->
-<div class="row justify-content-center mt-5">
-  <div class="col">
+<div class="row justify-content-center note-accordion">
+  <div class="col notes-col-fluid">
     <div class="accordion notes-accordion-wrapper" id="noteAccordion">
       {{#each displayNotes as |note idx|}}
-      <div class="notes-list-item-hdr animated slideInUp" {{action 'setActiveNote' note}}>
-        <button class="btn btn-secondary note-list-btn" type="button" data-toggle="collapse" data-target="#note-list-item-{{note.id}}" aria-expanded="true" aria-controls="collapse{{note.id}}">
+      <div class="notes-list-item-hdr animated slideInUp" >
+        <!-- Trigger Button -->
+        <button id="note-btn-{{idx}}" class="btn btn-secondary note-list-btn" type="button" {{action 'showNote' idx}}>
           <div class="row">
             <div class="col-1 notes-list-icon text-center">
               <i class="{{note.iconClass}}"></i>
             </div>
-            <div class="col-6 notes-list-title text-left">
+            <div class="col-7 notes-list-title text-left">
               {{note.title}}
             </div>
-            <div class="col-5 notes-list-category text-right font-italic">
+            <div class="col notes-list-category text-right font-italic">
               {{note.category}}
             </div>
           </div>
         </button>
-      </div>
-      <div id="note-list-item-{{note.id}}" class="collapse" aria-labelledby="heading{{note.id}}" data-parent="#noteAccordion">
-        <div class="notes-list-item-body">
-          {{note.desc}}
+        <!-- Note Body -->
+        <div id="note-list-item-{{note.id}}" class="note-panel">
+          <div class="notes-list-item-body" contenteditable="true">
+            {{note.desc}}
+          </div>
         </div>
       </div>
       {{/each}}
     </div>
   </div>
+
+  <!-- Modal -->
+  <div id="newNoteModal" class="container-fluid notes-new-modal animated slideInLeft {{if showNewNoteModal '' 'hidden'}}">
+
+    <!-- New Title Text Input -->
+    <div class="row mb-2">
+      <div class="col">
+        {{input class="form-control form-control-sm note-input-control" value=newNoteTitle placeholder="Enter a Title"}}
+      </div>
+    </div>
+
+    {{#if showNewCategoryText}}
+    <!-- New Category Text Input -->
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-sm btn-info" {{action 'toggleNewCategoryText'}}><i class="ion-close-round"></i></button>
+          </div>
+          {{input class="form-control form-control-sm note-input-control" value=newNoteCategoryText placeholder="Create a New Category"}}
+        </div>
+      </div>
+    </div>
+
+    {{else}}
+
+    <!-- Existing Category Select Input -->
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-sm btn-info" {{action 'toggleNewCategoryText'}}><i class="ion-plus-round"></i></button>
+          </div>
+          <select id="notesCategorySelect" class="form-control form-control-sm note-input-control" onchange={{action (mut newNoteCategoryId) value="target.value"}}>
+            <option value="" disabled selected hidden>Choose a Category</option>
+            {{#each categories as |cat|}}
+            <option value={{cat.id}} selected={{eq cat.id newNoteCategoryId}}>{{cat.label}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    {{/if}}
+
+    <div class="row mt-3">
+      <div class="col">
+        {{textarea class="form-control form-control-sm note-input-control note-new-body" value=newNoteText placeholder="Type Stuff Here..."}}
+      </div>
+    </div>
+  </div>
+
 </div>
 
 {{activeNote.title}}
@@ -54,68 +108,14 @@
       </button>
     </div>
     <div class="col-2">
-      <button class="btn btn-secondary note-list-btn" type="button"  {{action 'createNoteModal'}}>
+      <button class="btn btn-secondary note-list-btn" type="button"  {{action 'showNewNoteModal'}}>
         <i class="ion-plus-round"></i>
       </button>
     </div>
     <div class="col-2">
-      <button class="btn btn-secondary note-list-btn" type="button" disabled={{noteActionDisabled}} {{action 'deleteNoteModal'}}>
+      <button class="btn btn-secondary note-list-btn" type="button" disabled={{not showNewNoteModal}} {{action 'deleteNoteModal'}}>
         <i class="ion-trash-a"></i>
       </button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="actionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">{{modalTitle}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="col notes-new-form">
-
-          <div id="note-new-form-inputs" class="note-new-form-inputs">
-
-            <!-- Category -->
-            <div class="row">
-              <div class="col">
-                <select id="notesCategorySelect" class="notes-select-input" onchange={{action (mut newNoteCategoryId) value="target.value"}}>
-                  {{#each categories as |cat|}}
-                  <option value={{cat.id}} selected={{eq cat.id newNoteCategoryId}}>{{cat.label}}</option>
-                  {{/each}}
-                </select>
-              </div>
-            </div>
-
-
-            <!-- Title -->
-            <div class="row">
-              <div class="col text-center">
-                {{input type="text" class="form-control form-control-sm notes-input-box mt-2" value=newNoteTitle placeholder="Enter a Title"}}
-              </div>
-            </div>
-
-
-            <!-- Description -->
-            <div class="row">
-              <div class="col text-center">
-                {{textarea rows="6" class="form-control form-control-sm notes-input-box mt-2" value=newNoteText placeholder="What ya got..."}}
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-info" {{action 'addNote'}} data-dismiss="modal">Create Note</button>
-      </div>
     </div>
   </div>
 </div>

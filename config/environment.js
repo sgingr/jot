@@ -4,7 +4,7 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'jot',
     environment,
-    rootURL: '/',
+    rootURL: '/jot/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {

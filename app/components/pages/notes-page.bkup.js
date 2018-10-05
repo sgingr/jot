@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { later } from '@ember/runloop';
+import $ from 'jquery';
 
 export default Component.extend({
   /*
@@ -23,7 +23,6 @@ export default Component.extend({
   activeNote: null,
   maxNoteHeight: 1000,
   showNewCategoryText: false,
-  showNewNoteModal: false,
 
   /*
   |----------------------------------------------------------
@@ -86,27 +85,100 @@ export default Component.extend({
     }];
   },
 
+  didRender() {
+    console.log('up in didRender');
+  },
+
+  /*
+  |----------------------------------------------------------
+  | didInsertElement
+  |----------------------------------------------------------
+  */
+  didInsertElement() {
+    console.log('up in didInsertElement');
+    /*
+    //Category select
+    $('#notesCategorySelect').selectize({
+      create: true,
+      placeholder: 'Enter a Category',
+      sortField: 'text'
+    });
+
+    //Show modal function
+    $('#actionModal').on('show.bs.modal', function () {
+      $('.modal .modal-dialog').attr('class', 'modal-dialog zoomIn animated');
+    })
+
+    //Hide modal function
+    $('#actionModal').on('hide.bs.modal', function () {
+      $('.modal .modal-dialog').attr('class', 'modal-dialog zoomOut animated');
+    })
+    */
+  },
+
   /*
   |----------------------------------------------------------
   | actions
   |----------------------------------------------------------
   */
   actions: {
-    /*
-    |----------------------------------------------------------
-    | deleteNoteModal
-    |----------------------------------------------------------
-    */
-    deleteNoteModal() {
+    addNote() {
       let obj = this;
-      obj.closeNewNoteModal();
+      let categoryObj = obj.categories.findBy('id', obj.newNoteCategoryId);
+      let tmp = {
+        id: obj.incrementProperty('noteId'),
+        category: categoryObj.label,
+        title: obj.newNoteTitle,
+        desc: obj.newNoteText,
+        categoryId: obj.newNoteCategoryId,
+        iconClass: categoryObj.iconClass
+      }
+      obj.notes.pushObject(tmp);
+      obj.set('newNoteText', null);
+      obj.set('newNoteTitle', null);
+      obj.set('newNoteCategoryId', null);
     },
 
-    /*
-    |----------------------------------------------------------
-    | showNote
-    |----------------------------------------------------------
-    */
+    setActiveNote(note) {
+      let obj = this;
+      if(!obj.activeNote || (note.id !== obj.activeNote.id)) {
+        obj.set('activeNote', note);
+      } else {
+        obj.set('activeNote', null);
+      }
+    },
+
+    createNoteModal() {
+      let obj = this;
+      obj.set('modalTitle', 'Create a New Note');
+      obj.set('newNoteText', null);
+      obj.set('newNoteTitle', null);
+      obj.set('newNoteCategoryId', null);
+      $('#actionModal').modal('show');
+    },
+
+    editNoteModal() {
+      let obj = this;
+      console.log(obj.activeNote);
+      obj.set('modalTitle', 'Do Some Editing');
+      if(obj.activeNote) {
+        obj.set('newNoteText', obj.activeNote.desc);
+        obj.set('newNoteTitle', obj.activeNote.title);
+        obj.set('newNoteCategoryId', obj.activeNote.categoryId);
+        $('#actionModal').modal('show');
+      }
+    },
+
+    editNote() {
+      let obj = this;
+      let note = obj.notes.objectAt(obj.notes.in)
+    },
+
+    deleteNoteModal() {
+      let obj = this;
+      obj.set('modalTitle', 'Trash This Note');
+    },
+
     showNote(idx) {
       let obj = this;
 
@@ -120,57 +192,9 @@ export default Component.extend({
       }
     },
 
-    /*
-    |----------------------------------------------------------
-    | toggleNewCategoryText
-    |----------------------------------------------------------
-    */
     toggleNewCategoryText() {
       let obj = this;
       obj.toggleProperty('showNewCategoryText');
-    },
-
-    /*
-    |----------------------------------------------------------
-    | showNewNoteModal
-    |----------------------------------------------------------
-    */
-    showNewNoteModal() {
-      let obj = this;
-      if(obj.showNewNoteModal) {
-        let categoryObj = obj.categories.findBy('id', obj.newNoteCategoryId);
-        let tmp = {
-          id: obj.incrementProperty('noteId'),
-          category: categoryObj.label,
-          title: obj.newNoteTitle,
-          desc: obj.newNoteText,
-          categoryId: obj.newNoteCategoryId,
-          iconClass: categoryObj.iconClass
-        }
-        obj.notes.pushObject(tmp);
-        obj.set('newNoteText', null);
-        obj.set('newNoteTitle', null);
-        obj.set('newNoteCategoryId', null);
-        obj.set('newNoteCategoryText', null);
-        obj.closeNewNoteModal();
-      } else {
-        obj.set('showNewNoteModal', true);
-      }
-    },
-  },
-
-  /*
-  |----------------------------------------------------------
-  | closeNewNoteModal
-  |----------------------------------------------------------
-  */
-  closeNewNoteModal() {
-    let obj = this;
-    let modal = document.getElementById('newNoteModal');
-    modal.classList.remove("slideInLeft");
-    modal.classList.add("slideOutRight");
-    later(function() {
-      obj.set('showNewNoteModal', false);
-    },1000);
+    }
   }
 });
