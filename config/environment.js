@@ -23,6 +23,14 @@ module.exports = function(environment) {
     }
   };
 
+  //Endpoints
+  ENV.APP.LOG_ACTIVE_GENERATION = false;
+  ENV.APP.LOG_VIEW_LOOKUPS = false;
+
+  let host = 'http://localhost:8081';
+  ENV.categoryListUrl = host + '/categories';
+  ENV.noteListUrl = host + '/notes';
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;

@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <!-- Header -->
+      <div class="fixed-top notes-header-bar bg-info text-white animated slideInDown">
+        <div class="row justify-content-between ">
+          <div class="col-2">
+            Jot
+          </div>
+          <div class="col-2 text-right pl-2">
+            <a class="" >
+              <i class="ion-navicon-round"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- List -->
+      <div class="row justify-content-center note-accordion">
+        <div class="col notes-col-fluid">
+          <div class="accordion notes-accordion-wrapper" id="noteAccordion">
+            {{#each displayNotes as |note idx|}}
+            <div class="notes-list-item-hdr animated slideInUp" >
+              <!-- Trigger Button -->
+              <button id="note-btn-{{idx}}" class="btn btn-secondary note-list-btn" type="button" {{action 'showNote' idx note}}>
+                <div class="row">
+                  <div class="col-1 notes-list-icon text-center">
+                    <i class="{{note.iconClass}}"></i>
+                  </div>
+                  <div class="col-7 notes-list-title text-left">
+                    {{note.title}}
+                  </div>
+                  <div class="col notes-list-category text-right font-italic">
+                    {{note.category}}
+                  </div>
+                </div>
+              </button>
+              <!-- Note Body -->
+              <div id="note-list-item-{{note.id}}" class="note-panel">
+                <div class="notes-list-item-body" contenteditable="true">
+                  {{{note.desc}}}
+                </div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="newNoteModal" class="container-fluid notes-new-modal animated slideInLeft {{if showNewNoteModal '' 'hidden'}}">
+
+          <!-- New Title Text Input -->
+          <div class="row mb-2">
+            <div class="col">
+              {{input class="form-control form-control-sm note-input-control" value=newNoteTitle placeholder="Enter a Title"}}
+            </div>
+          </div>
+
+          {{#if showNewCategoryText}}
+          <!-- New Category Text Input -->
+          <div class="row">
+            <div class="col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button class="btn btn-sm btn-info" {{action 'toggleNewCategoryText'}}><i class="ion-close-round"></i></button>
+                </div>
+                {{input class="form-control form-control-sm note-input-control" value=newNoteCategoryText placeholder="Create a New Category"}}
+              </div>
+            </div>
+          </div>
+
+          {{else}}
+
+          <!-- Existing Category Select Input -->
+          <div class="row">
+            <div class="col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button class="btn btn-sm btn-info" {{action 'toggleNewCategoryText'}}><i class="ion-plus-round"></i></button>
+                </div>
+                <select id="notesCategorySelect" class="form-control form-control-sm note-input-control" onchange={{action (mut newNoteCategoryId) value="target.value"}}>
+                  <option value="" disabled selected hidden>Choose a Category</option>
+                  {{#each categories as |cat|}}
+                  <option value={{cat.id}} selected={{eq cat.id newNoteCategoryId}}>{{cat.label}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {{/if}}
+
+          <div class="row mt-3">
+            <div class="col">
+              <!-- {{textarea class="form-control form-control-sm note-input-control note-new-body" value=newNoteText placeholder="Type Stuff Here..."}} -->
+              <div id="newNoteBodyInput" class="note-input-control note-new-body" contenteditable="true" placeholder="Type something..."></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {{activeNote.title}}
+      {{newNoteCategoryId}}
+
+      <!-- Footer -->
+      <div class="fixed-bottom notes-footer-bar animated slideInUp">
+        <div class="row justify-content-around">
+          <div class="col-2">
+            <button class="btn btn-secondary note-list-btn" type="button" disabled={{noteActionDisabled}} {{action 'editNoteModal'}}>
+              <i class="ion-compose"></i>
+            </button>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-secondary note-list-btn" type="button"  {{action 'showNewNoteModal'}}>
+              <i class="ion-plus-round"></i>
+            </button>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-secondary note-list-btn" type="button" disabled={{not showNewNoteModal}} {{action 'deleteNoteModal'}}>
+              <i class="ion-trash-a"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -39,6 +39,7 @@ module.exports = function(defaults) {
   app.import('node_modules/bootstrap/dist/css/bootstrap.min.css');
   app.import('node_modules/animate.css/animate.min.css');
   app.import('vendor/ionicons-2.0.1/css/ionicons.min.css');
+  app.import('vendor/font-awesome/css/font-awesome.css');
 
   return app.toTree();
 };

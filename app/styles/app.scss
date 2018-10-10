@@ -1,11 +1,39 @@
 
+@import 'categories';
+@import 'notes';
+
 body {
-  background-image: url("img/weather.png");
+  //background-image: url("img/weather.png");
 }
 
 [contenteditable] {
   -webkit-user-select: text;
   user-select: text;
+}
+
+.main-body-wrapper {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  //background: url(stripes-light.png);
+  background: linear-gradient( rgb(93, 199, 224), rgba(96, 125, 139, 0.18) ), url(stripes-light.png);
+}
+
+.notes-loader-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #2193b0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.notes-loader-text {
+  font-size: 6rem;
+  color: #f5f5f5;
+  text-align: center;
+  top: 35%;
+  position: relative;
 }
 
 .notes-new-form {
@@ -98,10 +126,13 @@ body {
 }
 
 .notes-header-bar {
-  background: #6d767e;
+  //background: #6d767e;
   color: #fff;
   padding: .7rem;
   height: 45px;
+  background: #2193b0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .modal.fade{
@@ -153,6 +184,11 @@ body {
 .note-new-body {
   min-height: 500px;
   border: none;
+}
+
+.note-new-body[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #555;
 }
 
 .note-new-body:focus {
