@@ -1,23 +1,28 @@
+<div class="main-body-wrapper">
+  <div class="container-x">
+    <div class="row-x">
+      <div class="col-x">
 
+        <!-- Header -->
+        {{header-bar}}
 
-      <!-- List -->
-      <div class="category-list-wrapper {{transitionClass}}">
-        {{#each sortedCategories as |cat|}}
-          <div class="row category-list-item" {{action 'categoryClick' cat}}>
-            <div class="col">
-              <div class="row">
-                <div class="col-1">
-                  <i class="category-icon {{cat.iconClass}}"></i>
-                </div>
-                <div class="col">
-                  {{cat.name}}
-                  {{#if (gt cat.cnt 0)}}
-                    &nbsp; <span class="badge category-badge">{{cat.cnt}}</span>
-                  {{/if}}
-                </div>
-              </div>
-            </div>
-            <div class="col-2 text-right"><i class="ion-chevron-right"></i></div>
-          </div>
-        {{/each}}
+        <div class="content-wrapper">
+
+            <!-- Category List -->
+            {{pages/categories-page model=model}}
+
+            <!-- Notes List -->
+            {{pages/notes-page model=model}}
+
+            <!-- Notes List -->
+            {{pages/new-note-page model=model}}
+
+        </div>
+
+        <!-- Footer -->
+        {{footer-bar}}
+
       </div>
+    </div>
+  </div>
+</div>

@@ -39,7 +39,7 @@ export default Route.extend({
     let obj = this;
     obj.set('wrapper.user', model.user);
     obj.set('wrapper.label', 'Categories');
-    obj.set('wrapper.icon', 'ion-social-buffer');
+    obj.set('wrapper.icon', 'fa fa-home');
     obj.set('wrapper.showBackButton', false);
   }
 

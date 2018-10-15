@@ -2,17 +2,17 @@
 <div class="fixed-bottom notes-footer-bar">
   <div class="row justify-content-around">
     <div class="col-2">
-      <button class="btn btn-secondary note-list-btn" type="button" disabled={{noteActionDisabled}} {{action 'editNoteModal'}}>
+      <button class="btn note-list-btn" type="button" disabled={{noteActionDisabled}} {{action 'editNoteModal'}}>
         <i class="ion-compose"></i>
       </button>
     </div>
     <div class="col-2">
-      <button class="btn btn-secondary note-list-btn" type="button"  {{action 'showNewNoteModal'}}>
+      <button class="btn note-list-btn" type="button"  {{action 'addClick'}}>
         <i class="ion-plus-round"></i>
       </button>
     </div>
     <div class="col-2">
-      <button class="btn btn-secondary note-list-btn" type="button" disabled={{not showNewNoteModal}} {{action 'deleteNoteModal'}}>
+      <button class="btn note-list-btn" type="button" disabled={{not showNewNoteModal}} {{action 'deleteNoteModal'}}>
         <i class="ion-trash-a"></i>
       </button>
     </div>

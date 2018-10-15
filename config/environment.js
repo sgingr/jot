@@ -27,9 +27,11 @@ module.exports = function(environment) {
   ENV.APP.LOG_ACTIVE_GENERATION = false;
   ENV.APP.LOG_VIEW_LOOKUPS = false;
 
-  let host = 'http://localhost:8081';
+  //let host = 'http://localhost:8081';
+  let host = 'http://harplee.com:50000';
   ENV.categoryListUrl = host + '/categories';
   ENV.noteListUrl = host + '/notes';
+  ENV.noteUpdateUrl = host + '/note/update';
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;

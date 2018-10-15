@@ -1,10 +1,17 @@
 
 @import 'categories';
 @import 'notes';
+@import 'accordion';
 
 body {
   //background-image: url("img/weather.png");
 }
+
+/*
+* {
+  -webkit-overflow-scrolling: touch;
+}
+*/
 
 [contenteditable] {
   -webkit-user-select: text;
@@ -17,6 +24,15 @@ body {
   position: fixed;
   //background: url(stripes-light.png);
   background: linear-gradient( rgb(93, 199, 224), rgba(96, 125, 139, 0.18) ), url(stripes-light.png);
+}
+
+.content-wrapper {
+  position: relative;
+}
+
+.home-btn {
+  width: 50px;
+  cursor: pointer;
 }
 
 .notes-loader-wrapper {
@@ -52,24 +68,14 @@ body {
   border-bottom: solid 1px #f5f5f5;
 }
 
-.notes-list-item-body {
-  //border: solid 1px #f5f5f5;
-  //border-radius: 4px;
-  padding: 1rem;
-  font-size: 1rem;
-  background: #fff;
-}
-
-.notes-list-item-body:focus {
-  border: none;
-  outline: none;
-}
 
 .note-list-btn {
   width: 100%;
   border-radius: 0;
   padding-bottom: .5rem;
   padding-top: .5rem;
+  color: #fff;
+  background-color: #484f56;
 }
 
 .note-list-btn:focus {
@@ -120,7 +126,8 @@ body {
 
 .notes-footer-bar {
   //height: 5rem;
-  background: #6d767e;
+  border-top: solid 1px #495057;
+  background: #484f56;
   color: #fff;
   padding: .7rem;
 }
@@ -133,6 +140,7 @@ body {
   background: #2193b0;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: 0 5px 20px #1b1e21;
 }
 
 .modal.fade{
@@ -165,26 +173,11 @@ body {
   margin-top: 45px;
 }
 
-.note-panel {
-  padding: 0 18px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .45s ease-in-out;
-}
 
-.notes-new-modal {
-  position: absolute;
-  background: #fff;
-  height: 100%;
-  padding: 1rem;
-  //display: none;
-}
 
-.note-new-body {
-  min-height: 500px;
-  border: none;
-}
+
+
+
 
 .note-new-body[placeholder]:empty:before {
     content: attr(placeholder);
@@ -199,6 +192,10 @@ body {
 
 .hidden {
   display: none;
+}
+
+.flattened {
+  height: 0;
 }
 
 .note-input-control {

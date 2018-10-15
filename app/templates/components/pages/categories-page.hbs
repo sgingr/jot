@@ -1,0 +1,21 @@
+<!-- Category List -->
+  <div id="{{pageId}}" class="container-fluid category-list-wrapper animated {{transitionInClass}} {{if isActive '' 'hidden'}}">
+    {{#each sortedCategories as |cat|}}
+    <div class="row category-list-item" {{action 'categoryClick' cat}}>
+      <div class="col">
+        <div class="row">
+          <div class="col-1">
+            <i class="category-icon {{cat.iconClass}}"></i>
+          </div>
+          <div class="col">
+            {{cat.name}}
+            {{#if (gt cat.cnt 0)}}
+            &nbsp; <span class="badge category-badge">{{cat.cnt}}</span>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+      <div class="col-2 text-right"><i class="ion-chevron-right"></i></div>
+    </div>
+    {{/each}}
+  </div>

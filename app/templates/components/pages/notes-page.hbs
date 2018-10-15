@@ -1,44 +1,49 @@
-
-      <!-- List -->
-      <div class="category-list-wrapper {{transitionClass}}">
-        {{#each model.notes as |note idx|}}
-          <!-- Trigger -->
-          <div id="note-btn-{{idx}}" class="row category-list-item" {{action 'showNote' idx note}}>
-            <div class="col">
-              <div class="row">
-                <div class="col">{{note.title}}</div>
-                <div class="w-100"></div>
-                <div class="col font-italic align-self-center notes-date">{{note.createDate}}</div>
-              </div>
-            </div>
-            <div class="col-1 align-self-center">
-              <i class="ion-more"></i>
-            </div>
-          </div>
-          <!-- Note Body -->
-          <div id="note-list-item-{{note.id}}" class="note-panel">
-            <div class="notes-list-item-body" contenteditable="true">
-              {{{note.content}}}
-            </div>
-          </div>
-        {{/each}}
-
-        <!-- Modal -->
-        <div id="newNoteModal" class="container-fluid notes-new-modal animated slideInLeft {{if showNewNoteModal '' 'hidden'}}">
-
-          <!-- New Title Text Input -->
-          <div class="row mb-2">
-            <div class="col">
-              {{input class="form-control form-control-sm note-input-control" value=newNoteTitle placeholder="Enter a Title"}}
-            </div>
-          </div>
-
-          <div class="row mt-3">
-            <div class="col">
-              <!-- {{textarea class="form-control form-control-sm note-input-control note-new-body" value=newNoteText placeholder="Type Stuff Here..."}} -->
-              <div id="newNoteBodyInput" class="note-input-control note-new-body" contenteditable="true" placeholder="Type something..."></div>
-            </div>
+<!-- Note List -->
+  <div id="{{pageId}}" class="container-fluid notes-list-wrapper scroll-container scroller animated {{transitionInClass}} {{if isActive '' 'hidden'}}">
+    {{#each model.notes as |note idx|}}
+    <!-- Trigger -->
+    <div class="">
+      <div id="note-btn-{{idx}}" class="row note-list-item" onclick={{action 'showNote' note}}>
+        <div class="col-1 align-self-center ">
+          <i class="ion-plus-round note-list-item-icon {{if note.expanded 'note-icon-open' ''}}"></i>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col">{{note.title}}</div>
+            <div class="w-100"></div>
+            <div class="col font-italic align-self-center notes-date">{{note.createDate}}</div>
           </div>
         </div>
-
+        <div class="col-1 align-self-center">
+          <i class="ion-more"></i>
+        </div>
       </div>
+      <!-- Note Body -->
+      <div id="note-list-item-{{note.id}}" class="notes-list-item-body note-is-collapsed" >
+        <div id="note-list-content-{{note.id}}" class="note-input-area" onblur={{action 'inputBlur' note}} contenteditable="true">
+          {{{note.content}}}
+        </div>
+      </div>
+    </div>
+
+    {{/each}}
+
+    <!-- Modal -->
+    <div id="newNoteModal" class="container-fluid notes-new-modal animated slideInLeft {{if showNewNoteModal '' 'hidden'}}">
+
+      <!-- New Title Text Input -->
+      <div class="row mb-2">
+        <div class="col">
+          {{input class="form-control form-control-sm note-input-control" value=newNoteTitle placeholder="Enter a Title"}}
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col">
+          <!-- {{textarea class="form-control form-control-sm note-input-control note-new-body" value=newNoteText placeholder="Type Stuff Here..."}} -->
+          <div id="newNoteBodyInput" class="note-input-control note-new-body" contenteditable="true" placeholder="Type something..."></div>
+        </div>
+      </div>
+    </div>
+
+  </div>

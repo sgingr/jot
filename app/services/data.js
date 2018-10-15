@@ -9,11 +9,12 @@ export default Service.extend({
   | AdapterObjects
   |----------------------------------------------------------
   */
+
   categoryData: [],
 
   /*
   |----------------------------------------------------------
-  | Methods
+  | getCategoryList
   |----------------------------------------------------------
   */
   getCategoryList(userId) {
@@ -25,6 +26,11 @@ export default Service.extend({
     });
   },
 
+  /*
+  |----------------------------------------------------------
+  | getNoteList
+  |----------------------------------------------------------
+  */
   getNoteList(userId, categoryId) {
     let obj = this;
     let url = config.noteListUrl + '?user=' + userId + '&category=' + categoryId;
@@ -33,10 +39,41 @@ export default Service.extend({
     });
   },
 
+  /*
+  |----------------------------------------------------------
+  | getCategoryDetails
+  |----------------------------------------------------------
+  */
   getCategoryDetails(categoryId) {
     let obj = this;
     return obj.categoryData.findBy('id', parseInt(categoryId));
-  }
+  },
+
+  /*
+  |----------------------------------------------------------
+  | postNoteUpdate
+  |----------------------------------------------------------
+  */
+  postNoteUpdate(userId, noteObj) {
+    let obj = this;
+    let url = config.noteUpdateUrl + '?user=' + userId;
+    let postData = {
+      id: noteObj.id,
+      content: noteObj.content
+    };
+    return fetch(url, {
+      method: 'POST',
+      data: postData,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify(postData)
+    }).then((data) => {
+      return data;
+    }).catch((err) => {
+      return data;
+    });
+  },
 
 
 });

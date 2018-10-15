@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed, set, observer } from '@ember/object';
+import { computed, set } from '@ember/object';
 import { later } from '@ember/runloop';
 
 export default Component.extend({
@@ -68,38 +68,74 @@ export default Component.extend({
     | showNote
     |----------------------------------------------------------
     */
-    showNote(noteObj, event) {
+    showNote(idx, noteObj) {
       let obj = this;
-      event.preventDefault();
-      let id = 'note-list-item-' + noteObj.id;
-      let elem = document.getElementById(id);
-      elem.classList.toggle('note-is-collapsed');
-      elem.classList.toggle('note-is-expanded');
-      elem.classList.toggle('showNote');
-      set(noteObj, 'expanded', !noteObj.expanded);
+
+      let elem = document.getElementById('note-btn-' + idx);
+      let note = elem.nextElementSibling;
+      let noteBody = note.firstElementChild;
+      if (note.style.maxHeight){
+        note.style.maxHeight = null;
+        //Post update if it changed
+        let newContent = noteBody.innerHTML;
+        //console.log(newContent.trim());
+        //console.log(noteObj.desc.trim());
+        if(noteObj.content.trim() !== newContent.trim()) {
+          set(noteObj, 'desc', newContent);
+          obj.postUpdateNote(noteObj);
+        }
+
+      } else {
+        //note.style.maxHeight = note.scrollHeight + "px";
+        note.style.maxHeight = obj.maxNoteHeight + "px";
+        //console.log(noteBody);
+        //console.dir(noteBody);
+        //console.log('text is = ' + noteBody.textContent);
+        //console.log(noteBody.innerHTML);
+      }
+      //console.log(obj.notes);
     },
 
     /*
     |----------------------------------------------------------
-    | inputBlur
+    | toggleNewCategoryText
     |----------------------------------------------------------
     */
-    inputBlur(noteObj) {
+    toggleNewCategoryText() {
       let obj = this;
-      let elem = document.getElementById('note-list-content-' + noteObj.id);
+      obj.toggleProperty('showNewCategoryText');
+    },
 
-      if(elem) {
-        //Post update if it changed
-        let newContent = elem.innerHTML;
-        //console.log(newContent.trim());
-        //console.log(noteObj.desc.trim());
-        if(noteObj.content.trim() !== newContent.trim()) {
-          set(noteObj, 'content', newContent);
-          obj.postUpdateNote(noteObj);
+    /*
+    |----------------------------------------------------------
+    | showNewNoteModal
+    |----------------------------------------------------------
+    */
+    showNewNoteModal() {
+      let obj = this;
+      if(obj.showNewNoteModal) {
+        let categoryObj = obj.categories.findBy('id', obj.newNoteCategoryId);
+        let newNoteBody = document.getElementById('newNoteBodyInput');
+        let tmp = {
+          id: obj.incrementProperty('noteId'),
+          category: categoryObj.label,
+          title: obj.newNoteTitle,
+          desc: newNoteBody.innerHTML,
+          categoryId: obj.newNoteCategoryId,
+          iconClass: categoryObj.iconClass
         }
+        obj.notes.pushObject(tmp);
+        obj.postNewNote(tmp);
+        obj.set('newNoteText', null);
+        obj.set('newNoteTitle', null);
+        obj.set('newNoteCategoryId', null);
+        obj.set('newNoteCategoryText', null);
+        newNoteBody.innerHTML = null;
+        obj.closeNewNoteModal();
+      } else {
+        obj.set('showNewNoteModal', true);
       }
-    }
-
+    },
   },
 
   /*
@@ -137,9 +173,6 @@ export default Component.extend({
     let obj = this;
     console.log('update Note POST: ');
     console.log(item);
-    obj.data.postNoteUpdate(obj.model.user, item).then((data) => {
-      console.log('Post was good...');
-    });
   },
 
   trimLeadingTrailing() {

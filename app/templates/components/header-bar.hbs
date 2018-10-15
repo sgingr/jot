@@ -3,7 +3,7 @@
   <div class="row justify-content-between ">
     <div class="col">
       {{#if wrapper.showBackButton}}
-        <i class="ion-chevron-left" {{action 'goHome'}}></i>
+        <div class="home-btn" {{action 'goHome'}}><i class="ion-chevron-left"></i></div>
       {{else}}
         <i class="{{wrapper.icon}}"></i>
       {{/if}}
