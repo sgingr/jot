@@ -41,7 +41,12 @@ export default Service.extend({
         from: 'newNotePage',
         toAction: 'slideInLeft',
         fromAction: 'slideOutRight',
-      }
+      }, {
+        to: 'notesPage',
+        from: 'newNotePage',
+        toAction: 'slideInRight',
+        fromAction: 'slideOutLeft',
+      },
     ])
   },
 

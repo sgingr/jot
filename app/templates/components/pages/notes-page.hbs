@@ -1,6 +1,6 @@
 <!-- Note List -->
   <div id="{{pageId}}" class="container-fluid notes-list-wrapper scroll-container scroller animated {{transitionInClass}} {{if isActive '' 'hidden'}}">
-    {{#each model.notes as |note idx|}}
+    {{#each sortedNotes as |note idx|}}
     <!-- Trigger -->
     <div class="">
       <div id="note-btn-{{idx}}" class="row note-list-item" onclick={{action 'showNote' note}}>
@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col">{{note.title}}</div>
             <div class="w-100"></div>
-            <div class="col font-italic align-self-center notes-date">{{note.createDate}}</div>
+            <div class="col font-italic align-self-center notes-date">{{if (not note.lastModify) note.createDate note.lastModify}}</div>
           </div>
         </div>
         <div class="col-1 align-self-center">
@@ -27,23 +27,5 @@
     </div>
 
     {{/each}}
-
-    <!-- Modal -->
-    <div id="newNoteModal" class="container-fluid notes-new-modal animated slideInLeft {{if showNewNoteModal '' 'hidden'}}">
-
-      <!-- New Title Text Input -->
-      <div class="row mb-2">
-        <div class="col">
-          {{input class="form-control form-control-sm note-input-control" value=newNoteTitle placeholder="Enter a Title"}}
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col">
-          <!-- {{textarea class="form-control form-control-sm note-input-control note-new-body" value=newNoteText placeholder="Type Stuff Here..."}} -->
-          <div id="newNoteBodyInput" class="note-input-control note-new-body" contenteditable="true" placeholder="Type something..."></div>
-        </div>
-      </div>
-    </div>
 
   </div>

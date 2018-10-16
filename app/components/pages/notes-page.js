@@ -10,36 +10,17 @@ export default Component.extend({
   */
   pageName: 'notesPage',
   pageId: 'notesPage',
-  displayNotes: computed('notes.[]', function() {
-    return this.notes.sortBy('id').reverseObjects();
-  }),
-  noteActionDisabled: computed('activeNote', function() {
-    return (!this.activeNote);
-  }),
-  headerLabel: computed('model.category', function() {
-    if(this.data.categoryData) {
-      return this.data.categoryData.name;
+  sortedNotes: computed('model.notes', 'model.notes.[]', function() {
+    if(this.model.notes) {
+      return this.model.notes.sortBy('sortKey').reverseObjects();
     }
-  }),
-  headerIcon: computed('model.category', function() {
-    if(this.data.categoryData) {
-      return this.data.categoryData.icon_class;
-    }
+    return [];
   }),
   isActive: computed('transition.activePage', function() {
     return this.transition.activePage === this.pageId;
   }),
   transitionClass: 'slideInLeft',
   notes: null,
-  newNoteText: null,
-  newNoteTitle: null,
-  newNoteCategoryId: null,
-  noteId: 4,
-  modalTitle: null,
-  activeNote: null,
-  maxNoteHeight: 1000,
-  showNewCategoryText: false,
-  showNewNoteModal: false,
 
   /*
   |----------------------------------------------------------
@@ -91,10 +72,8 @@ export default Component.extend({
       if(elem) {
         //Post update if it changed
         let newContent = elem.innerHTML;
-        //console.log(newContent.trim());
-        //console.log(noteObj.desc.trim());
         if(noteObj.content.trim() !== newContent.trim()) {
-          set(noteObj, 'content', newContent);
+          //set(noteObj, 'content', newContent);
           obj.postUpdateNote(noteObj);
         }
       }
@@ -119,26 +98,14 @@ export default Component.extend({
 
   /*
   |----------------------------------------------------------
-  | postNewNote
-  |----------------------------------------------------------
-  */
-  postNewNote(item) {
-    let obj = this;
-    console.log('new Note POST: ');
-    console.log(item);
-  },
-
-  /*
-  |----------------------------------------------------------
   | postUpdateNote
   |----------------------------------------------------------
   */
-  postUpdateNote(item) {
+  postUpdateNote(noteObj) {
     let obj = this;
-    console.log('update Note POST: ');
-    console.log(item);
-    obj.data.postNoteUpdate(obj.model.user, item).then((data) => {
-      console.log('Post was good...');
+    obj.data.postNoteUpdate(obj.model.user, noteObj).then((data) => {
+      set(noteObj, 'sortKey', data[0].sortKey);
+      set(noteObj, 'lastModify', data[0].lastModify);
     });
   },
 

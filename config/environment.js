@@ -31,6 +31,7 @@ module.exports = function(environment) {
   let host = 'http://harplee.com:50000';
   ENV.categoryListUrl = host + '/categories';
   ENV.noteListUrl = host + '/notes';
+  ENV.noteAddUrl = host + '/note/add';
   ENV.noteUpdateUrl = host + '/note/update';
 
   if (environment === 'development') {

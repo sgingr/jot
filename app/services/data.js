@@ -75,5 +75,28 @@ export default Service.extend({
     });
   },
 
+  /*
+  |----------------------------------------------------------
+  | postNote
+  |----------------------------------------------------------
+  */
+  postNote(userId, noteObj) {
+    let obj = this;
+    let url = config.noteAddUrl + '?user=' + userId;
+    let json = JSON.stringify(noteObj);
+    return fetch(url, {
+      method: 'POST',
+      data: noteObj,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: json
+    }).then((data) => {
+      return data;
+    }).catch((err) => {
+      return data;
+    });
+  },
+
 
 });
