@@ -77,7 +77,18 @@ export default Component.extend({
           obj.postUpdateNote(noteObj);
         }
       }
-    }
+    },
+
+    /*
+    |----------------------------------------------------------
+    | showNoteMenuPage
+    |----------------------------------------------------------
+    */
+    showNoteMenuPage() {
+      let obj = this;
+      obj.set('wrapper.page', 'noteMenuPage');
+      obj.transition.transition('noteMenuPage', 'notesPage');
+    },
 
   },
 

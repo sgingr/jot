@@ -19,7 +19,9 @@ export default Component.extend({
 
       obj.data.getCategoryList(obj.wrapper.user).then((data) => {
         //obj.set('model.categories', data);
+        obj.set('wrapper.page', 'categoriesPage');
         obj.set('wrapper.label', 'Categories');
+        obj.set('wrapper.iconClass', null);
         obj.set('wrapper.showBackButton', false);
         obj.transition.transition('categoriesPage', obj.transition.activePage);
       });

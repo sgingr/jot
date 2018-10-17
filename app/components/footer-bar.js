@@ -10,19 +10,33 @@ export default Component.extend({
   actions: {
     /*
     |----------------------------------------------------------
-    | addClick
+    | addCategory
     |----------------------------------------------------------
     */
-    addClick() {
+    addCategory() {
       let obj = this;
-      //Add a new note
-      if(obj.transition.activePage === 'notesPage') {
-        obj.transition.transition('newNotePage', 'notesPage');
-      } else if(obj.transition.activePage === 'categoriesPage') {
 
-      } else if(obj.transition.activePage === 'newNotePage') {
-        obj.postNewNote();
-      }
+    },
+
+    /*
+    |----------------------------------------------------------
+    | postNewNote
+    |----------------------------------------------------------
+    */
+    postNewNote() {
+      let obj = this;
+      obj.postNewNote();
+    },
+
+    /*
+    |----------------------------------------------------------
+    | goToNewNotePage
+    |----------------------------------------------------------
+    */
+    goToNewNotePage() {
+      let obj = this;
+      obj.set('wrapper.page', 'newNotePage');
+      obj.transition.transition('newNotePage', 'notesPage');
     },
 
     /*
@@ -35,6 +49,36 @@ export default Component.extend({
       if(obj.transition.activePage === 'newNotePage') {
         obj.goToNotes();
       }
+    },
+
+    /*
+    |----------------------------------------------------------
+    | collapseAll
+    |----------------------------------------------------------
+    */
+    collapseAll() {
+      let obj = this;
+      let elems = document.getElementsByClassName('note-is-expanded');
+      for(var i=elems.length - 1; i >= 0; i--) {
+        elems[i].classList.toggle('note-is-collapsed');
+        elems[i].classList.toggle('note-is-expanded');
+      }
+      obj.model.notes.setEach('expanded', false);
+    },
+
+    /*
+    |----------------------------------------------------------
+    | expandAll
+    |----------------------------------------------------------
+    */
+    expandAll() {
+      let obj = this;
+      let elems = document.getElementsByClassName('note-is-collapsed');
+      for(var i=elems.length - 1; i >= 0; i--) {
+        elems[i].classList.toggle('note-is-expanded');
+        elems[i].classList.toggle('note-is-collapsed');
+      }
+      obj.model.notes.setEach('expanded', true);
     }
   },
 

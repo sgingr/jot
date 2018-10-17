@@ -40,7 +40,8 @@ export default Route.extend({
     obj.set('wrapper.user', model.user);
     obj.set('wrapper.label', 'Categories');
     obj.set('wrapper.icon', 'fa fa-home');
-    obj.set('wrapper.showBackButton', false);
+    //obj.set('wrapper.showBackButton', false);
+    obj.set('wrapper.page', 'categoriesPage');
   }
 
 });

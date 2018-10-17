@@ -3,25 +3,33 @@
     {{#each sortedNotes as |note idx|}}
     <!-- Trigger -->
     <div class="">
-      <div id="note-btn-{{idx}}" class="row note-list-item" onclick={{action 'showNote' note}}>
-        <div class="col-1 align-self-center ">
-          <i class="ion-plus-round note-list-item-icon {{if note.expanded 'note-icon-open' ''}}"></i>
-        </div>
+      <div id="note-btn-{{idx}}" class="row no-gutters note-list-item" >
         <div class="col">
-          <div class="row">
-            <div class="col">{{note.title}}</div>
-            <div class="w-100"></div>
-            <div class="col font-italic align-self-center notes-date">{{if (not note.lastModify) note.createDate note.lastModify}}</div>
+          <div class="row no-gutters " onclick={{action 'showNote' note}}>
+            <div class="col-1 align-self-center ">
+              <i class="ion-plus-round note-list-item-icon {{if note.expanded 'note-icon-open' ''}}"></i>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col">{{note.title}}</div>
+                <div class="w-100"></div>
+                <div class="col font-italic align-self-center notes-date">{{if (not note.lastModify) note.createDate note.lastModify}}</div>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="col-1 align-self-center">
-          <i class="ion-more"></i>
+          <i class="ion-more" {{action 'showNoteMenuPage'}}></i>
         </div>
       </div>
       <!-- Note Body -->
       <div id="note-list-item-{{note.id}}" class="notes-list-item-body note-is-collapsed" >
         <div id="note-list-content-{{note.id}}" class="note-input-area" onblur={{action 'inputBlur' note}} contenteditable="true">
           {{{note.content}}}
+        </div>
+        <div class="note-input-save-btn">
+          <i class="ion-android-upload"></i>
         </div>
       </div>
     </div>

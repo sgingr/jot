@@ -1,9 +1,11 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { later } from '@ember/runloop';
 
 export default Component.extend({
   pageName: 'categories',
   pageId: 'categoriesPage',
+  showBadges: false,
   isActive: computed('transition.activePage', function() {
     return this.transition.activePage === this.pageId;
   }),
@@ -12,16 +14,16 @@ export default Component.extend({
       return this.model.categories.sortBy('name');
     }
   }),
-  transitionInClass: 'slideInLeft',
 
   actions: {
     categoryClick(cat) {
       let obj = this;
-      //obj.router.transitionTo('notes', { queryParams: { user: obj.model.user, category: cat.id } });
       obj.data.getNoteList(obj.model.user, cat.id).then((data) => {
         obj.set('model.notes', data);
         obj.set('model.categoryInfo', obj.data.getCategoryDetails(cat.id));
+        obj.set('wrapper.page', 'notesPage');
         obj.set('wrapper.label', obj.model.categoryInfo.name);
+        obj.set('wrapper.iconClass', obj.model.categoryInfo.iconClass);
         obj.set('wrapper.showBackButton', true);
         obj.transition.transition('notesPage', obj.pageId);
       });

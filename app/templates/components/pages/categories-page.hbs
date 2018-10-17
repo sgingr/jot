@@ -9,7 +9,7 @@
           </div>
           <div class="col">
             {{cat.name}}
-            {{#if (gt cat.cnt 0)}}
+            {{#if (and showBadges (gt cat.cnt 0))}}
             &nbsp; <span class="badge category-badge">{{cat.cnt}}</span>
             {{/if}}
           </div>

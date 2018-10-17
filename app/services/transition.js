@@ -7,9 +7,7 @@ export default Service.extend({
   |----------------------------------------------------------
   */
   activePage: 'categoriesPage',
-  initialAnimation: 'slideInLeft',
   hiddenClass: 'hidden',
-  flattenedClass: 'flattened',
 
   /*
   |----------------------------------------------------------
@@ -24,28 +22,33 @@ export default Service.extend({
       {
         to: 'notesPage',
         from: 'categoriesPage',
-        toAction: 'slideInRight',
-        fromAction: 'slideOutLeft',
+        toAction: 'fadeInRight',
+        fromAction: 'fadeOutLeft',
       }, {
         to: 'categoriesPage',
         from: 'notesPage',
-        toAction: 'slideInLeft',
-        fromAction: 'slideOutRight',
+        toAction: 'fadeInLeft',
+        fromAction: 'fadeOutRight',
       }, {
         to: 'newNotePage',
         from: 'notesPage',
-        toAction: 'slideInDown',
-        fromAction: 'slideOutRight',
+        toAction: 'fadeInDown',
+        fromAction: 'fadeOutRight',
       }, {
         to: 'categoriesPage',
         from: 'newNotePage',
-        toAction: 'slideInLeft',
-        fromAction: 'slideOutRight',
+        toAction: 'fadeInLeft',
+        fromAction: 'fadeOutRight',
       }, {
         to: 'notesPage',
         from: 'newNotePage',
-        toAction: 'slideInRight',
-        fromAction: 'slideOutLeft',
+        toAction: 'fadeInRight',
+        fromAction: 'fadeOutLeft',
+      }, {
+        to: 'noteMenuPage',
+        from: 'notesPage',
+        toAction: 'fadeInDown',
+        fromAction: 'blur',
       },
     ])
   },
@@ -67,10 +70,10 @@ export default Service.extend({
       //Event function
       let waitForAnimation = function(e){
         e.target.removeEventListener(e.type, waitForAnimation);
-
-        fromElem.classList.remove(mapObj.fromAction);
-        fromElem.classList.remove(obj.initialAnimation);
-        fromElem.classList.add(obj.hiddenClass);
+        if(mapObj.fromAction !== 'blur') {
+          fromElem.classList.remove(mapObj.fromAction);
+          fromElem.classList.add(obj.hiddenClass);
+        }
         obj.set('activePage', to);
       };
 
@@ -78,6 +81,15 @@ export default Service.extend({
       fromElem.classList.add(mapObj.fromAction);
       toElem.classList.remove(obj.hiddenClass);
       toElem.classList.add(mapObj.toAction);
+
+      //Handle a blur class with no animation
+      /*
+      if(mapObj.fromAction === 'blur') {
+        obj.set('activePage', to);
+      } else {
+        fromElem.addEventListener(obj._getAnimationEndEvent(), waitForAnimation);
+      }
+      */
     }
   },
 
@@ -97,13 +109,11 @@ export default Service.extend({
         elem.classList.remove(animationClass);
         if(hideAfter) {
           elem.classList.add(obj.hiddenClass);
-          //elem.classList.add(obj.flattenedClass);
         }
       };
 
       elem.addEventListener(obj._getAnimationEndEvent(), waitForAnimation);
       elem.classList.remove(obj.hiddenClass);
-      //elem.classList.remove(obj.flattenedClass);
       elem.classList.add(animationClass);
     }
   },
@@ -118,7 +128,6 @@ export default Service.extend({
     let elem = document.getElementById(id);
 
     if(elem) {
-      //elem.classList.toggle('is-expanded');
       elem.classList.toggle('note-is-collapsed');
   		elem.classList.toggle('showNote');
     }

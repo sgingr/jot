@@ -1,0 +1,21 @@
+{
+  "short_name": "jot",
+  "name": "jot",
+  "icons": [
+    {
+      "src": "/jot/img/jot-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/jot/img/jot-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/jot/home?user=1",
+  "background_color": "#484f56",
+  "display": "standalone",
+  "scope": "/jot/",
+  "theme_color": "#484f56"
+}

@@ -1,0 +1,203 @@
+
+@import 'categories';
+@import 'notes';
+@import 'accordion';
+
+body {
+  //background-image: url("img/weather.png");
+}
+
+/*
+* {
+  -webkit-overflow-scrolling: touch;
+}
+*/
+
+[contenteditable] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.main-body-wrapper {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  //background: url(stripes-light.png);
+  background: linear-gradient( rgb(93, 199, 224), rgba(96, 125, 139, 0.18) ), url(stripes-light.png);
+}
+
+.content-wrapper {
+  position: relative;
+}
+
+.home-btn {
+  width: 50px;
+  cursor: pointer;
+}
+
+.notes-loader-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #2193b0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.notes-loader-text {
+  font-size: 6rem;
+  color: #f5f5f5;
+  text-align: center;
+  top: 35%;
+  position: relative;
+}
+
+.notes-new-form {
+  background: #fff;
+  padding: 1rem;
+  border: solid 1px silver;
+  border-radius: 3px;
+}
+
+.notes-input-box:focus {
+  border-color: #17a2b8;
+  box-shadow: 0 0 0 0.2rem #17a2b885;
+}
+
+.notes-header-box {
+  border-bottom: solid 1px #f5f5f5;
+}
+
+
+.note-list-btn {
+  width: 100%;
+  border-radius: 0;
+  padding-bottom: .5rem;
+  padding-top: .5rem;
+  color: #fff;
+  background-color: #484f56;
+}
+
+.note-list-btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.note-ftr-btn {
+  width: 100%;
+  border-radius: 0;
+  font-size: 1.5rem;
+}
+
+.notes-accordion-wrapper {
+  border-bottom: solid 1px silver;
+  //border-radius: 3px;
+}
+
+.notes-select-input {
+  background-color: #fff;
+  margin-bottom: -.45rem;
+
+  .selectize-input {
+    height: calc(1.8125rem + 2px);
+    //padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+  }
+
+  .option {
+    cursor: pointer;
+  }
+
+  .selectize-input {
+    background-image: none;
+  }
+}
+
+.notes-select-input:focus {
+  border-color: #17a2b8;
+  box-shadow: 0 0 0 0.2rem #17a2b885;
+}
+
+.notes-footer-bar {
+  //height: 5rem;
+  border-top: solid 1px #495057;
+  background: #484f56;
+  color: #fff;
+  padding: .7rem;
+}
+
+.notes-header-bar {
+  //background: #6d767e;
+  color: #fff;
+  padding: .7rem;
+  height: 45px;
+  background: #2193b0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: 0 5px 20px #1b1e21;
+}
+
+.modal.fade{
+  opacity:1;
+}
+.modal.fade .modal-dialog {
+   -webkit-transform: translate(0);
+   -moz-transform: translate(0);
+   transform: translate(0);
+}
+
+.notes-list-icon {
+  color: #f7d161e0;
+}
+
+.notes-list-title {
+  font-size: .9rem;
+}
+
+.notes-list-category {
+  font-size: .9rem;
+}
+
+.notes-col-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.note-accordion {
+  margin-top: 45px;
+}
+
+
+
+
+
+
+
+.note-new-body[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #555;
+}
+
+.note-new-body:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.flattened {
+  height: 0;
+}
+
+.note-input-control {
+  font-size: 1rem;
+}

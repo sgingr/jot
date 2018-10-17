@@ -10,7 +10,5 @@ export default Service.extend({
   icon: null,
   showBackButton: false,
   user: null,
-
-
-
+  iconClass: null,
 });

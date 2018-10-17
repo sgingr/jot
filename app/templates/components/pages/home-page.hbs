@@ -4,9 +4,9 @@
       <div class="col-x">
 
         <!-- Header -->
-        {{header-bar}}
+        {{header-bar model=model}}
 
-        <div class="content-wrapper">
+        <div class="content-wrapper animated {{transitionInClass}}">
 
             <!-- Category List -->
             {{pages/categories-page model=model}}
@@ -14,8 +14,11 @@
             <!-- Notes List -->
             {{pages/notes-page model=model}}
 
-            <!-- Notes List -->
+            <!-- New Note -->
             {{pages/new-note-page model=model}}
+
+            <!-- Note Menu -->
+            {{pages/note-menu-page model=model}}
 
         </div>
 

@@ -3,9 +3,9 @@ import { computed } from '@ember/object';
 import $ from 'jquery';
 
 export default Component.extend({
+  transitionInClass: 'fadeIn',
 
   didInsertElement() {
-    console.log('home - didInsertElement');
     var lastY = 0; // Needed in order to determine direction of scroll.
     $(".scroll-container").on('touchstart', function(event) {
       lastY = event.touches[0].clientY;

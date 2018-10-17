@@ -1,0 +1,42 @@
+/*
+|----------------------------------------------------------
+| Wrapper Classes
+|----------------------------------------------------------
+*/
+.home-btn {
+  width: 50px;
+  cursor: pointer;
+}
+
+.notes-header-bar {
+  @include header-bar-background();
+  padding: .7rem;
+  height: 45px;
+}
+
+.notes-footer-bar {
+  border-top: $footer-border;
+  background: $footer-bg-color;
+  color: $footer-color;
+  padding: .7rem;
+}
+
+.note-footer-btn {
+  color: $footer-color;
+  background-color: $footer-bg-color;
+  width: 100%;
+  border-radius: 0;
+  padding-bottom: .5rem;
+  padding-top: .5rem;
+}
+
+.note-footer-btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.header-bar-total {
+  font-style: italic;
+  font-size: .8rem;
+  margin: 0 0.3rem;
+}

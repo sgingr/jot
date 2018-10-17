@@ -1,20 +1,58 @@
 <!-- Footer -->
 <div class="fixed-bottom notes-footer-bar">
+
+  {{#if (eq transition.activePage 'categoriesPage')}}
+
+  <!-- Category Page -->
   <div class="row justify-content-around">
     <div class="col-2">
-      <button class="btn note-list-btn" type="button" disabled={{noteActionDisabled}} {{action 'editNoteModal'}}>
-        <i class="ion-compose"></i>
+      <button class="btn note-footer-btn" type="button"  {{action 'addCategory'}}>
+        <i class="ion-plus-round"></i>
+      </button>
+    </div>
+  </div>
+
+  {{else if (eq transition.activePage 'notesPage')}}
+
+  <!-- Notes Page -->
+  <div class="row justify-content-around">
+    <div class="col-2">
+      <button class="btn note-footer-btn" type="button" {{action 'collapseAll'}}>
+        <i class="ion-arrow-shrink"></i>
       </button>
     </div>
     <div class="col-2">
-      <button class="btn note-list-btn" type="button"  {{action 'addClick'}}>
+      <button class="btn note-footer-btn" type="button"  {{action 'goToNewNotePage'}}>
         <i class="ion-plus-round"></i>
       </button>
     </div>
     <div class="col-2">
-      <button class="btn note-list-btn" type="button" {{action 'trashClick'}}>
+      <button class="btn note-footer-btn" type="button" {{action 'expandAll'}}>
+        <i class="ion-arrow-expand"></i>
+      </button>
+    </div>
+  </div>
+
+  {{else if (eq transition.activePage 'newNotePage')}}
+
+  <!-- Notes Page -->
+  <div class="row justify-content-around">
+    <div class="col-2">
+      <button class="btn note-footer-btn" type="button" {{action 'collapseAll'}}>
+        <i class=""></i>
+      </button>
+    </div>
+    <div class="col-2">
+      <button class="btn note-footer-btn" type="button"  {{action 'postNewNote'}}>
+        <i class="ion-plus-round"></i>
+      </button>
+    </div>
+    <div class="col-2">
+      <button class="btn note-footer-btn" type="button" {{action 'trashClick'}}>
         <i class="ion-trash-a"></i>
       </button>
     </div>
   </div>
+
+  {{/if}}
 </div>

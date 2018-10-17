@@ -1,18 +1,60 @@
 <!-- Header -->
 <div class="fixed-top notes-header-bar bg-info text-white">
+
+  {{#if (eq wrapper.page 'categoriesPage')}}
+
+  <!-- Category Page -->
   <div class="row justify-content-between ">
-    <div class="col">
-      {{#if wrapper.showBackButton}}
-        <div class="home-btn" {{action 'goHome'}}><i class="ion-chevron-left"></i></div>
-      {{else}}
-        <i class="{{wrapper.icon}}"></i>
-      {{/if}}
+    <div class="col-auto">
+      <i class="{{wrapper.icon}}"></i>
     </div>
     <div class="col text-center">
-      {{wrapper.label}}
+      <span><i class="category-icon {{wrapper.iconClass}}"></i> &nbsp; {{wrapper.label}}</span>
     </div>
-    <div class="col text-right pl-2">
+    <div class="col-auto text-right pl-2">
       <i class="ion-navicon-round"></i>
     </div>
   </div>
+
+  {{else if (eq wrapper.page 'notesPage')}}
+
+  <!-- Notes Page -->
+  <div class="row justify-content-between ">
+    <div class="col-auto">
+      <div class="home-btn" {{action 'goHome'}}><i class="ion-chevron-left"></i></div>
+    </div>
+    <div class="col text-center">
+      <span>
+        <i class="category-icon {{wrapper.iconClass}}"></i> &nbsp;
+        {{wrapper.label}} &nbsp;
+        {{#if (gt model.notes.length 0)}}
+          (<span class="header-bar-total">{{model.notes.length}} of {{model.notes.length}}</span>)
+        {{/if}}
+      </span>
+    </div>
+    <div class="col-auto text-right pl-2">
+      <i class="ion-navicon-round"></i>
+    </div>
+  </div>
+
+  {{else if (eq wrapper.page 'newNotePage')}}
+
+  <!-- Notes Page -->
+  <div class="row justify-content-between ">
+    <div class="col-auto">
+      <div class="home-btn" {{action 'goHome'}}><i class="ion-chevron-left"></i></div>
+    </div>
+    <div class="col text-center">
+      <span>
+        <i class="category-icon {{wrapper.iconClass}}"></i> &nbsp;
+        {{wrapper.label}} &nbsp;
+        (Create New)
+      </span>
+    </div>
+    <div class="col-auto text-right pl-2">
+      <i class="ion-navicon-round"></i>
+    </div>
+  </div>
+
+  {{/if}}
 </div>

@@ -1,4 +1,8 @@
-
+/*
+|----------------------------------------------------------
+| Note Classes
+|----------------------------------------------------------
+*/
 .note-icon-open {
   transform: rotate(-225deg);
 }
@@ -9,95 +13,107 @@
 }
 
 .note-input-area {
+  border-right: $item-border;
+  border-left: $item-border;
   padding: 1rem;
-  border-right: solid 1px #484f56;
-  border-left: solid 1px #484f56;
+  padding-right: 1.4rem;
+}
+
+.note-input-area:focus {
+  outline: none;
 }
 
 .note-list-item {
+  color: $item-color;
+  border-bottom: $item-border;
+  background-color: $item-bg-color;
   position: relative;
-  background: #6c757d;
   padding: 1rem;
-  color: #f5f5f5;
-  border-bottom: solid 1px #495057;
   cursor: pointer;
 }
 
-/*
-.note-panel {
-  padding: 0 18px;
-  background-color: white;
-  //max-height: 0;
-  //z-index: 50;
-  //overflow: hidden;
-  //transition: max-height .45s ease-in-out;
-
-  height:auto;
-  overflow:hidden;
-  max-height:50em;
-  transition:max-height 1s;
+.note-list-item:hover {
+  background-color: darken($item-bg-color, 10%);
 }
-*/
 
 .notes-new-wrapper {
-  margin-top: 60px;
   position: absolute;
+  margin-top: 60px;
   width: 100%;
+  z-index: 51;
 }
 
 .notes-list-wrapper {
-  margin-top: 45px;
   position: absolute;
+  margin-top: 45px;
   width: 100%;
   max-height: 100vh;
   overflow: auto;
   padding-bottom: 100px;
-  //overflow: scroll !important;
-  //overflow-x: hidden !important;
-  //overflow-y: scroll !important;
   -webkit-overflow-scrolling: touch;
+  padding-right: 0;
+  padding-left: 0;
+  transition: filter .5s ease-in-out;
+  z-index: 50;
 }
 
 .notes-date {
   font-size: .7rem;
-  color: #fdf8d6;
+  color: $item-secondary-color;
 }
 
 .notes-new-modal {
-  background: #6d767e;
+  //background-color: $item-bg-color;
   height: 100%;
   padding: 1.5rem;
   border-radius: 4px;
+  //box-shadow: 0 5px 10px grey;
 }
 
 .notes-new-title-input {
-  box-shadow: inset 0 0 5px grey;
+  //box-shadow: inset 0 0 5px grey;
   text-align: center;
+  background-color: $note-area-background-color;
+  outline: none;
+  border: none;
+  color: $note-area-color;
+  font-family: monospace, monospace;
+  transition: box-shadow .4s ease-in-out;
+}
+
+.notes-new-title-input:focus {
+  box-shadow: 0 0 1rem 0.2rem #31a1bd;
+  background-color: $note-area-background-color;
+  outline: none;
+  border: none;
+  //color: $note-area-color;
 }
 
 .note-new-body {
+  color: $note-area-color;
+  background-color: $note-area-background-color;
   min-height: calc(100vh - 15rem);
   max-height: calc(100vh - 15rem);
   border-radius: 4px;
-  box-shadow: inset 0 0 10px grey;
+  //box-shadow: inset 0 0 10px grey;
   padding: 1rem;
-  background-color: #fff;
   overflow: auto;
+  font-family: monospace, monospace;
+  transition: box-shadow .4s ease-in-out;
+  margin-right: -25px;
+  margin-left: -25px;
 }
 
 .notes-list-item-body {
-  //border: solid 1px #f5f5f5;
-  //border-radius: 4px;
-  //padding: 1rem;
+  color: $note-area-color;
+  background-color: $note-area-background-color;
+  position: relative;
   font-size: 1rem;
-  background: #fff;
-  //z-index: 50;
   overflow: hidden;
-
   height:auto;
   max-height:50em;
   transition: max-height 1s ease-in-out;
-
+  font-family: monospace, monospace;
 }
 
 .notes-list-item-body:focus {
@@ -116,4 +132,29 @@
 
 .hideNote {
   //animation: accordionOut 0.45s alternate ease-in-out both 1;
+}
+
+.note-new-body[placeholder]:empty:before {
+  content: attr(placeholder);
+  color: #555;
+}
+
+.note-new-body:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 1rem 0.2rem #31a1bd;
+}
+
+.note-input-control {
+  font-size: 1rem;
+}
+
+.note-input-save-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+  i {
+    font-size: 1rem;
+  }
 }
