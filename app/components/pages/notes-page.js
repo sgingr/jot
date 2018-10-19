@@ -74,7 +74,7 @@ export default Component.extend({
         let newContent = elem.innerHTML;
         if(noteObj.content.trim() !== newContent.trim()) {
           //set(noteObj, 'content', newContent);
-          obj.postUpdateNote(noteObj);
+          obj.postUpdateNote(noteObj, newContent);
         }
       }
     },
@@ -112,9 +112,9 @@ export default Component.extend({
   | postUpdateNote
   |----------------------------------------------------------
   */
-  postUpdateNote(noteObj) {
+  postUpdateNote(noteObj, newContent) {
     let obj = this;
-    obj.data.postNoteUpdate(obj.model.user, noteObj).then((data) => {
+    obj.data.postNoteUpdate(obj.model.user, noteObj, newContent).then((data) => {
       set(noteObj, 'sortKey', data[0].sortKey);
       set(noteObj, 'lastModify', data[0].lastModify);
     });

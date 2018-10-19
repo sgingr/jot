@@ -7,4 +7,10 @@ export default Component.extend({
     return this.transition.activePage === this.pageId;
   }),
 
+  actions: {
+    deleteNote() {
+      console.log('deleteNote...');
+    }
+  }
+
 });

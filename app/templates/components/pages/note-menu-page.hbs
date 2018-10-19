@@ -1,17 +1,35 @@
 <!-- New Note Page -->
 <div id="{{pageId}}" class="container notes-new-wrapper animated {{if isActive '' 'hidden'}}">
-  <div class="notes-new-modal">
-    <!-- New Title Text Input -->
-    <div class="row mb-2">
-      <div class="col">
-        {{input class="form-control form-control-sm note-input-control notes-new-title-input" value=newNoteTitle placeholder="This is the menu page"}}
+  <div class="notes-menu-wrapper">
+
+    <!-- Background -->
+    <div class="notes-menu-bkg"></div>
+
+    <!-- Menu Area -->
+    <div class="notes-menu-area">
+      <div class="row">
+
+        <!-- Delete Note -->
+        <div class="col-auto">
+          <div class="note-menu-sqr-btn">
+            <i class="ion-trash-a"></i>
+          </div>
+        </div>
+
+        <!-- Delete Note -->
+        <div class="col-auto">
+          <div class="col note-menu-sqr-btn">
+            <i class="ion-trash-a"></i>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <div class="row mt-3">
-      <div class="col">
-        <div class="note-input-control note-new-body" contenteditable="true" placeholder="Type something..."></div>
-      </div>
+    <!-- Menu Footer -->
+    <div class="note-menu-footer">
+      <i class="ion-ios-close"></i> &nbsp; Return
     </div>
+
   </div>
 </div>

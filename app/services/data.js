@@ -54,12 +54,12 @@ export default Service.extend({
   | postNoteUpdate
   |----------------------------------------------------------
   */
-  postNoteUpdate(userId, noteObj) {
+  postNoteUpdate(userId, noteObj, newContent) {
     let obj = this;
     let url = config.noteUpdateUrl + '?user=' + userId;
     let postData = {
       id: noteObj.id,
-      content: noteObj.content
+      content: newContent
     };
     return fetch(url, {
       method: 'POST',
