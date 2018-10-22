@@ -49,6 +49,11 @@ export default Service.extend({
         from: 'notesPage',
         toAction: 'fadeInDown',
         fromAction: 'blur',
+      }, {
+        to: 'notesPage',
+        from: 'noteMenuPage',
+        toAction: 'unblur',
+        fromAction: 'fadeOutDown',
       },
     ])
   },
@@ -80,7 +85,12 @@ export default Service.extend({
       fromElem.addEventListener(obj._getAnimationEndEvent(), waitForAnimation);
       fromElem.classList.add(mapObj.fromAction);
       toElem.classList.remove(obj.hiddenClass);
-      toElem.classList.add(mapObj.toAction);
+      if(mapObj.toAction === 'unblur') {
+        toElem.classList.toggle('blur');
+      } else {
+        toElem.classList.add(mapObj.toAction);
+      }
+
 
       //Handle a blur class with no animation
       /*

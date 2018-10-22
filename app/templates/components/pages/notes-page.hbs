@@ -1,6 +1,7 @@
 <!-- Note List -->
   <div id="{{pageId}}" class="container-fluid notes-list-wrapper scroll-container scroller animated {{transitionInClass}} {{if isActive '' 'hidden'}}">
     {{#each sortedNotes as |note idx|}}
+      {{#if (not-eq note.active 0)}}
     <!-- Trigger -->
     <div class="">
       <div id="note-btn-{{idx}}" class="row no-gutters note-list-item" >
@@ -8,19 +9,27 @@
           <div class="row no-gutters " onclick={{action 'showNote' note}}>
             <div class="col-1 align-self-center ">
               <i class="ion-plus-round note-list-item-icon {{if note.expanded 'note-icon-open' ''}}"></i>
+
             </div>
             <div class="col">
               <div class="row">
                 <div class="col">{{note.title}}</div>
                 <div class="w-100"></div>
-                <div class="col font-italic align-self-center notes-date">{{if (not note.lastModify) note.createDate note.lastModify}}</div>
+                <div class="col font-italic align-self-center notes-date">
+
+                  <span>{{if (not note.lastModify) note.createDate note.lastModify}}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-1 align-self-center">
-          <i class="ion-more" {{action 'showNoteMenuPage'}}></i>
+        <div class="col-1 align-self-center text-right">
+          <span><i class="note-status-list-icon {{note.statusClass}}"></i></span> &nbsp;
+        </div>
+
+        <div class="col-1 align-self-center text-right" onclick={{action 'showNoteMenuPage' note}}>
+          <i class="ion-more" ></i>
         </div>
       </div>
       <!-- Note Body -->
@@ -34,6 +43,7 @@
       </div>
     </div>
 
+      {{/if}}
     {{/each}}
 
   </div>

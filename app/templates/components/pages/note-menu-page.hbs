@@ -1,34 +1,65 @@
 <!-- New Note Page -->
-<div id="{{pageId}}" class="container notes-new-wrapper animated {{if isActive '' 'hidden'}}">
+<div id="{{pageId}}" class="notes-menu-outer animated {{if isActive '' 'hidden'}}">
   <div class="notes-menu-wrapper">
 
     <!-- Background -->
     <div class="notes-menu-bkg"></div>
 
+    <!-- Menu Header -->
+    <div class="note-menu-header">
+      <div class="row justify-content-center">
+        <div class="col">
+          <div class="notes-menu-title">
+            {{model.activeNote.title}}
+            <div class="notes-menu-date">
+              {{if (not model.activeNote.lastModify) model.activeNote.createDate model.activeNote.lastModify}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Menu Area -->
     <div class="notes-menu-area">
-      <div class="row">
+
+
+
+      <div class="row justify-content-center">
 
         <!-- Delete Note -->
         <div class="col-auto">
-          <div class="note-menu-sqr-btn">
-            <i class="ion-trash-a"></i>
+          <div class="note-menu-sqr-btn" {{action 'toggleActive'}}>
+            <i class="ion-trash-a {{if (eq model.activeNote.active 0) 'note-delete-btn-active' ''}}"></i>
           </div>
         </div>
 
-        <!-- Delete Note -->
+        <!-- Flag Note -->
         <div class="col-auto">
-          <div class="col note-menu-sqr-btn">
-            <i class="ion-trash-a"></i>
+          <div class="col note-menu-sqr-btn" {{action 'toggleFlagged'}}>
+            <i class="ion-ios-flag {{if (eq model.activeNote.flagged 1) 'note-flagged-btn-active' ''}}"></i>
           </div>
         </div>
 
       </div>
+
+      <div class="row justify-content-center">
+
+        {{#each data.statusInfo as |status|}}
+          <!-- Flag Note -->
+          <div class="col-auto">
+            <div class="col note-menu-sqr-btn" {{action 'setStatus' status}}>
+              <i class="{{status.statusClass}} {{if (eq model.activeNote.statusId status.id) '' 'note-status-btn-inactive'}}"></i>
+            </div>
+          </div>
+        {{/each}}
+
+      </div>
+
     </div>
 
     <!-- Menu Footer -->
-    <div class="note-menu-footer">
-      <i class="ion-ios-close"></i> &nbsp; Return
+    <div class="note-menu-footer" {{action 'closeModal'}}>
+      <i class="ion-close-round"></i> &nbsp; Close
     </div>
 
   </div>

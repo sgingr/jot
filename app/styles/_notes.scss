@@ -170,28 +170,38 @@
 | Note Menu Page
 |----------------------------------------------------------
 */
+.notes-menu-outer {
+  position: absolute;
+  width: 100%;
+  z-index: 51;
+  bottom: 60px;
+}
+
 .notes-menu-wrapper {
   position: relative;
-  height: 50vh;
+  height: 300px;
   margin: 1rem;
+  box-shadow: 5px 5px 5px grey;
+  border-radius: 10px;
 }
 
 .notes-menu-bkg {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #fff; //#1b1e21;
+  background: #fff;//#343a40;
   opacity: .5;
-  border-radius: 4px;
+  border-radius: 10px;
   z-index: 100;
 }
 
 .notes-menu-area {
   position: absolute;
   z-index: 101;
-  padding: 2rem;
+  padding: 1rem;
   width: 100%;
   height: 100%;
+  padding-top: 70px;
 }
 
 .note-menu-sqr-btn {
@@ -200,19 +210,32 @@
   color: #fff;
   opacity: .5;
   margin-top: 1rem;
-  padding: 1rem;
+  padding: .5rem;
   width: 4.3rem;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
+  i {
+    transition: color .3s ease-in-out;
+  }
 }
 
-.note-menu-sqr-btn {
-
+.note-menu-sqr-btn .engaged {
+  color: #28a745;
 }
 
 .note-menu-btn {
   width: 100%;
+}
+
+.note-menu-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #666f73;
+  z-index: 101;
 }
 
 .note-menu-footer {
@@ -224,5 +247,54 @@
   z-index: 101;
   cursor: pointer;
   padding: .4rem;
-  border-top: solid 1px #dee2e6;
+  color: #fff;
+  background-color: #666f73;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  i {
+    //color: #721c24;
+  }
+}
+
+.notes-menu-title {
+  font-size: 1.3rem;
+  color: #fff;
+  text-align: center;
+  padding: .4rem;
+}
+
+.notes-menu-date {
+  position: relative;
+  font-size: .75rem;
+  font-style: italic;
+  color: #fdf8d6;
+}
+
+.note-status-open {
+  color: orange;
+}
+
+.note-status-in-progress {
+  color: #34a4bf;
+}
+
+.note-status-complete {
+  color: #28a745;
+}
+
+.note-status-btn-inactive {
+  color: #fff;
+}
+
+.note-delete-btn-active {
+  color: #dc3545;
+}
+
+.note-flagged-btn-active {
+  color: #3F69AA;
+}
+
+.note-status-list-icon {
+  font-size: 1.4rem;
+  opacity: .8;
 }

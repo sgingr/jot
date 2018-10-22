@@ -84,9 +84,11 @@ export default Component.extend({
     | showNoteMenuPage
     |----------------------------------------------------------
     */
-    showNoteMenuPage() {
+    showNoteMenuPage(noteObj) {
       let obj = this;
       obj.set('wrapper.page', 'noteMenuPage');
+      obj.set('model.activeNote', noteObj);
+      console.log(noteObj);
       obj.transition.transition('noteMenuPage', 'notesPage');
     },
 

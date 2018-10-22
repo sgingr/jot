@@ -66,6 +66,17 @@ body {
 
 .content-wrapper {
   position: relative;
+  height: 100vh;
+}
+
+.content-mask {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  opacity: .5;
+  z-index: 500;
+  display: none;
 }
 
 .notes-loader-wrapper {

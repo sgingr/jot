@@ -33,6 +33,7 @@ module.exports = function(environment) {
   ENV.noteListUrl = host + '/notes';
   ENV.noteAddUrl = host + '/note/add';
   ENV.noteUpdateUrl = host + '/note/update';
+  ENV.statusInfoUrl = host + '/note/status';
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
